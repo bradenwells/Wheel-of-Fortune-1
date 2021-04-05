@@ -140,6 +140,92 @@ public class WheelOfFortune
                     break;
                 default: System.out.println("Not a valid choice");
                     break;
-
+ }
+        }
+        
+        //Amount of Players and puzzles
+        /*
+        Player p1 = new Player();
+        Player p2 = new Player();
+        Player p3 = new Player();
+        Player p4 = new Player();
+        */
+        
+        System.out.print("Number Of players(1-4): ");
+        playerAmount = scMain.nextInt();
+        System.out.print("Number Of puzzles(1-25): ");
+        int puzzleAmount = scMain.nextInt();
+        for(int ran = 0; ran <= puzzleAmount; ran++)
+        {
+        
+        
+        
+        
+        //hidden = phraseArrayToBlank(puzzle);
+        
+        /*
+        switch (playerAmount)
+        {
+            case 1: 
+                break;
+            case 2: 
+                break;
+            case 3: 
+                break;
+            case 4: 
+                break;
+        }
+        */
+        // Player Name Initialization.
+        String playName;
+        
+        for(int k = 0; k < playerAmount; k++)
+        {
+            switch (k)
+            {
+                case 0: System.out.println("Enter Player " + (k+1) + "'s name:");
+                        players.add(p1);
+                        playName = scMain.next();
+                        players.get(k).setName(playName);
+                        players.get(k).newGame();
+                    break;
+                case 1: System.out.println("Enter Player " + (k+1) + "'s name:");
+                        playName = scMain.next();
+                        players.add(p2);
+                        players.get(k).setName(playName);
+                        players.get(k).newGame();
+                    break;
+                case 2: System.out.println("Enter Player " + (k+1) + "'s name:");
+                        playName = scMain.next();
+                        players.add(p3);
+                        players.get(k).setName(playName);
+                        players.get(k).newGame();
+                    break;
+                case 3: System.out.println("Enter Player " + (k+1) + "'s name:");
+                        playName = scMain.next();
+                        players.add(p4);
+                        players.get(k).setName(playName);
+                        players.get(k).newGame();
+                    break;
+            }
+        }
+        
+        p1.isTurn(true);
+        String hide;
+        newPuzz();
+        //display Each Player's Balance
+        while(u < playerAmount)
+        {
+            if(players.get(u).getTurn())
+            {
+                System.out.println(players.get(u).getName() + "'s Balance:" + players.get(u).getRBal());
+                System.out.println("Its player "+(u+1)+"'s turn");
+                System.out.println(genre);
+                hide = Arrays.toString(hidden);
+                System.out.println(hide);
+                takeTurn();
+            }
+        
+        }
 
         
