@@ -228,4 +228,27 @@ public class WheelOfFortune
         
         }
 
-        
+        }
+    }
+    
+    public static int spin()
+    {
+        //Random spinGenerator = new Random();  Has no use
+        int fin = 0;
+        spinInt = randNum.nextInt(12);
+        if(spinInt <= 9)
+        {
+           fin = spinCash[spinInt]; 
+        }
+        else if(spinInt == 10)
+        {
+            fin = 0;
+        }
+        else if(spinInt == 11)
+        {
+            fin = 0;
+        }
+        return fin;
+    }
+    public static void takeTurn()
+    {
