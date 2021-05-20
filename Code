@@ -252,3 +252,331 @@ public class WheelOfFortune
     }
     public static void takeTurn()
     {
+System.out.println("Would you like to Spin (S) or Solve the Puzzle (P)?");
+                    choice = scMain.next();
+                    //System.out.println(choice);
+                    int rbal;
+                    switch (choice)
+                    {
+                        case "s":rob = spin();
+                                 
+                                 if (spinCash[spinInt] == 0)
+                                 {
+                                     System.out.println("You lose a turn!");
+                                     u++;
+                                     if (u >= playerAmount)
+                                        {
+                                            u = 0;
+                                            players.get(u).isTurn(true);
+                                            
+                                        }
+                                        
+                                        else
+                                        {
+                                            players.get(u).isTurn(true);
+                                        }
+                                 }
+                                 else if (spinCash[spinInt] == 1)
+                                 {
+                                     System.out.println("Bankrupt!");
+                                     u++;
+                                     if (u >= playerAmount)
+                                        {
+                                            u = 0;
+                                            players.get(u).isTurn(true);
+                                            
+                                        }
+                                        
+                                        else
+                                        {
+                                            players.get(u).isTurn(true);
+                                        }
+                                 }
+                                 else
+                                 {
+                                     System.out.println("You Spun: " + spinCash[spinInt]);
+                                     System.out.println("What letter will you guess?");
+                                    strGuess = scMain.next();
+                                    //System.out.println(strGuess);
+                                    chGuess = strGuess.charAt(0);
+                                    if(!isGuessCorrect(puzzle, chGuess))
+                                    {
+                                        System.out.println("Wrong choice, End of turn");
+                                        players.get(u).isTurn(false);
+                                        u++;//ends turn
+                                        //System.out.println(u);
+                                        //System.out.println(playerAmount);
+                                        if (u >= playerAmount)
+                                        {
+                                            u = 0;
+                                            players.get(u).isTurn(true);
+                                            
+                                        }
+                                        
+                                        else
+                                        {
+                                            players.get(u).isTurn(true);
+                                        }
+                                        //System.out.println(u);
+                                       // System.out.println(playerAmount);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        hidden = revealLetter(puzzle ,hidden, chGuess);
+                                        rbal = rob * spinMulti();
+                                        players.get(u).addrBal(rbal);
+                                        if (isPhraseSolved(puzzle, hidden))
+                                        {
+                                            players.get(u).addTBal(0);
+                                            System.out.println("Congratulations!");
+                                            newPuzz();
+                                            for(int lit = 0; lit < playerAmount; lit++)
+                                            {
+                                                players.get(lit).bankrupt();
+                                            }
+                                        }
+                                    }
+                                 }
+                                 break;
+                        case "p":System.out.println("what is your guess?");
+                                 strGuess = scMain1.next();
+                                 finalGuess = strGuess.toCharArray();
+                                 if (isPhraseSolved(finalGuess, puzzle))
+                                 {
+                                     System.out.println("Correct!");
+                                     System.out.println("");
+                                     players.get(u).addTBal(1000);
+                                     newPuzz();
+                                     for(int li = 0; li < playerAmount; li++)
+                                     {
+                                         players.get(li).bankrupt();
+                                     }
+                                    
+                                 }
+                                 else
+                                 {
+                                     System.out.println("Incorrect, your Turn is over");
+                                     players.get(u).isTurn(false);
+                                     u++;//ends turn
+                                     if (u >= playerAmount)
+                                     {
+                                         players.get(0).isTurn(true);
+                                         u = 0;
+                                     }
+                                     else
+                                     {
+                                         players.get(u).isTurn(true);
+                                     }
+                                 }
+                                 break;
+                        default: System.out.println("");
+                                 System.out.println("Not an option");
+                                 break;
+                    }
+    }
+    
+    public static int spinMulti()
+    {
+        int i = 0;
+        String s = Arrays.toString((puzzle));
+        String ms;
+        
+        for(int m = 0; m < s.length(); m++)
+        {
+            if(Character.toUpperCase(s.charAt(m)) == Character.toUpperCase(chGuess))
+            {
+                i++;
+            }
+        }
+        
+        return i;
+    }
+    public static void newPuzz()
+    {
+        int puzCat = 0;
+        puzCat = randNum.nextInt(25);
+        switch(puzCat)
+        {
+            case 0: puzzle = phraseToArray(before_and_after[0]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Before and After"; 
+                break;
+            case 1: puzzle = phraseToArray(before_and_after[1]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Before and After"; 
+                break;
+            case 2: puzzle = phraseToArray(before_and_after[2]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Before and After"; 
+                break;
+            case 3: puzzle = phraseToArray(before_and_after[3]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Before and After"; 
+                break;
+            case 4: puzzle = phraseToArray(before_and_after[4]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Before and After"; 
+                break;
+            case 5: puzzle = phraseToArray(events[0]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Events"; 
+                break;
+            case 6: puzzle = phraseToArray(events[1]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Events";
+                break;
+            case 7: puzzle = phraseToArray(events[2]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Events";
+                break;
+            case 8: puzzle = phraseToArray(events[3]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Events";
+                break;
+            case 9: puzzle = phraseToArray(events[4]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Events";
+                break;
+            case 10: puzzle = phraseToArray(movie_title[0]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Movie Title";
+                break;
+            case 11: puzzle = phraseToArray(movie_title[1]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Movie Title";
+                break;
+            case 12: puzzle = phraseToArray(movie_title[2]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Movie Title";
+                break;
+            case 13: puzzle = phraseToArray(movie_title[3]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Movie Title";
+                break;
+            case 14: puzzle = phraseToArray(movie_title[4]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "Movie Title";
+                break;
+            case 15: puzzle = phraseToArray(on_the_map[0]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "On the Map";
+                break;
+            case 16: puzzle = phraseToArray(on_the_map[1]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "On the Map";
+                break;
+            case 17: puzzle = phraseToArray(on_the_map[2]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "On the Map";
+                break;
+            case 18: puzzle = phraseToArray(on_the_map[3]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "On the Map";
+                break;
+            case 19: puzzle = phraseToArray(on_the_map[4]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "On the Map";
+                break;
+            case 20: puzzle = phraseToArray(what_are_you_doing[0]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "What are you Doing?";
+                break;
+            case 21: puzzle = phraseToArray(what_are_you_doing[1]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "What are you Doing?";
+                break;
+            case 22: puzzle = phraseToArray(what_are_you_doing[2]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "What are you Doing?";
+                break;
+            case 23: puzzle = phraseToArray(what_are_you_doing[3]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "What are you Doing?";
+                break;
+            case 24: puzzle = phraseToArray(what_are_you_doing[4]);
+                    hidden = phraseArrayToBlank(puzzle);
+                    genre = "What are you Doing?";
+                break;
+        }
+        
+    }
+    public static char[] phraseToArray(String newPhrase)
+        {
+            char[] array = new char [newPhrase.length()];
+            for (int index = 0; index < newPhrase.length(); index++)
+            {
+                array[index] = newPhrase.charAt(index);
+            }
+            return array;
+            
+        }
+    public static char[] phraseArrayToBlank (char[] phraseArray)
+        {
+            char[] hiddenArray = new char [phraseArray.length];
+            for (int index = 0; index < phraseArray.length; index++)
+            {
+                if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(Character.toUpperCase(phraseArray[index])) >= 0)  
+                    hiddenArray[index] = '*';
+                
+                else 
+                    hiddenArray[index] = phraseArray[index];
+                    }
+            return hiddenArray;
+        }
+        
+    public static String letterRemove (String letterStr, char letter)
+        {
+            String letterStrRemove = "";
+            int findIndex = letterStr.indexOf (Character.toUpperCase(letter));
+            
+            letterStrRemove = letterStr.substring(0,findIndex) + letterStr.substring(findIndex+1);
+            
+            return letterStrRemove;
+        }
+        
+    public static boolean isGuessCorrect (char[] phraseArray, char guess)
+        {
+            boolean correct = false;
+            for (int index = 0; index < phraseArray.length; index++)
+            {
+                //if the guess is found in the char array
+                if (Character.toUpperCase(phraseArray[index]) == (Character.toUpperCase(guess)))
+                {
+                    correct = true;
+                    break;
+                }
+                else
+                    correct = false;
+            }
+            if (correct == true)
+                return true;
+            else
+                return false;
+        }
+
+
+    public static char[] revealLetter (char[] phraseArray, char[] phraseArrayHidden,char guess)
+                {
+                    for (int index = 0; index < phraseArray.length; index++)
+                    {
+                        if (Character.toUpperCase(phraseArray[index]) == Character.toUpperCase(guess))
+                            phraseArrayHidden[index] = phraseArray[index];
+                    }
+                    return phraseArrayHidden;
+                }
+                
+    public static boolean isPhraseSolved (char[] phraseArray, char[] phraseArrayHidden)
+        {
+            boolean playerWin;
+            String pa;
+            String pah;
+            pa = Arrays.toString(phraseArray);
+            pah = Arrays.toString(phraseArrayHidden);
+            System.out.println(pa.toUpperCase());
+            System.out.println(pah.toUpperCase());
+            playerWin = pa.toUpperCase().equals(pah.toUpperCase());
+            
+            return playerWin;
+        }
+}
