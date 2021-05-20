@@ -41,6 +41,48 @@ public class WheelOfFortune
     static String[] on_the_map = new String [5];
     static String[] what_are_you_doing = new String [5];
     
+    public static class Player
+    {
+        boolean pTurn;
+        String pName;
+        int RBal;
+        
+        public Player()
+        {
+            pTurn = false;
+            pName = "";
+            RBal = 0;
+        }
+        public String getName()
+        {
+            return pName;
+        }        
+        public void setName(String name)
+        {
+            pName = name;
+        }
+        public boolean getTurn()
+        {
+            return pTurn;
+        }
+        public void newGame()
+        {
+            
+        }
+        public void isTurn(boolean myTurn)
+        {
+            pTurn = myTurn;
+        }
+        public void takeTurn()
+        {
+            
+        }
+        public int getRBal()
+        {
+            return RBal;
+        }
+    }
+
     //to be used for the spins
     public static void main(String[] args) 
     {
