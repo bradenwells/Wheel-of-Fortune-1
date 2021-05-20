@@ -1,4 +1,4 @@
-package wheeloffortune;
+package wheel;
 
 import java.util.Scanner;
 import java.util.Random;
@@ -8,10 +8,10 @@ import java.util.Arrays;
  * 
  * @authors Braden Wells
  
- * @Project Wheel of fortune
+ * @Project Wheel of Fortune
  */
 
-public class WheelOfFortune 
+public class Wheel 
 {
 
     private static int spinInt;//need to add 1 because random end is exclusive
